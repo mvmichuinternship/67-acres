@@ -47,7 +47,7 @@ const ViewProperty = () => {
 
   useEffect(() => {
     if (loggedIn && email) {
-      fetch('https://67acres-webapp.azurewebsites.net/Property/GetProperties', {
+      fetch('https://67acres-webapp.azurewebsites.net/api/Property/GetProperties', {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JSON.parse(localStorage.getItem("loginData") || '{}')?.token}`,
