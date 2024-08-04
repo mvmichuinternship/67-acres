@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,10 +8,10 @@ import {
   faArrowUp,
   faRightLeft,
   faSackDollar,
-  faCoins
+  faCoins,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import {Tooltip} from "react-tooltip";
+import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { toast } from "react-toastify";
 import SwitchRole from "../screens/SwitchRoles.tsx";
@@ -47,10 +45,10 @@ const Sidebar = () => {
       setRole(event.detail);
     };
 
-    window.addEventListener('roleChanged', handleRoleChange);
+    window.addEventListener("roleChanged", handleRoleChange);
 
     return () => {
-      window.removeEventListener('roleChanged', handleRoleChange);
+      window.removeEventListener("roleChanged", handleRoleChange);
     };
   }, []);
 
@@ -61,8 +59,8 @@ const Sidebar = () => {
         <li>
           <Link
             to="/"
-            data-tooltip-id="sidebar-tip"
-            data-tooltip-content="Home"
+            // data-tooltip-id="sidebar-tip"
+            // data-tooltip-content="Home"
             className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
           >
             <FontAwesomeIcon icon={faHome} className="h-6 w-6" />
@@ -72,8 +70,8 @@ const Sidebar = () => {
           {role === "buyer" && (
             <Link
               to="/view-properties"
-              data-tooltip-id="sidebar-tip"
-              data-tooltip-content="View Properties"
+              // data-tooltip-id="sidebar-tip"
+              // data-tooltip-content="View Properties"
               className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
             >
               <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
@@ -82,8 +80,8 @@ const Sidebar = () => {
           {role === "seller" && (
             <Link
               to="/my-properties"
-              data-tooltip-id="sidebar-tip"
-              data-tooltip-content="My Properties"
+              // data-tooltip-id="sidebar-tip"
+              // data-tooltip-content="My Properties"
               className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
             >
               <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
@@ -94,8 +92,8 @@ const Sidebar = () => {
           <li>
             <Link
               to="/post-property"
-              data-tooltip-id="sidebar-tip"
-              data-tooltip-content="Post Property"
+              // data-tooltip-id="sidebar-tip"
+              // data-tooltip-content="Post Property"
               className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
             >
               <FontAwesomeIcon icon={faPlusCircle} className="h-6 w-6" />
@@ -106,8 +104,8 @@ const Sidebar = () => {
           <li>
             <button
               onClick={toggleModal}
-              data-tooltip-id="sidebar-tip"
-              data-tooltip-content="Switch Role"
+              // data-tooltip-id="sidebar-tip"
+              // data-tooltip-content="Switch Role"
               className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
             >
               <FontAwesomeIcon icon={faRightLeft} className="h-6 w-6" />
@@ -125,8 +123,8 @@ const Sidebar = () => {
           <li>
             <button
               onClick={toggleModal}
-              data-tooltip-id="sidebar-tip"
-              data-tooltip-content="Switch Role"
+              // data-tooltip-id="sidebar-tip"
+              // data-tooltip-content="Switch Role"
               className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
             >
               <FontAwesomeIcon icon={faRightLeft} className="h-6 w-6" />
@@ -149,8 +147,8 @@ const Sidebar = () => {
                 navigate("/login");
                 window.location.reload();
               }}
-              data-tooltip-id="sidebar-tip"
-              data-tooltip-content="Log out"
+              // data-tooltip-id="sidebar-tip"
+              // data-tooltip-content="Log out"
               className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
             >
               <FontAwesomeIcon icon={faSignOutAlt} className="h-6 w-6" />
@@ -158,26 +156,26 @@ const Sidebar = () => {
           )}
         </li>
         {loggedIn && (
-        <li>
-        <button
-            onClick={toggleUpgradePlanModal}
-            data-tooltip-id="sidebar-tip"
-            data-tooltip-content="Upgrade Plan"
-            className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
-          >
-            <FontAwesomeIcon icon={faCoins} className="h-6 w-6" />
-          </button>
-          <Modal
+          <li>
+            <button
+              onClick={toggleUpgradePlanModal}
+              // data-tooltip-id="sidebar-tip"
+              // data-tooltip-content="Upgrade Plan"
+              className="flex items-center text-white hover:bg-blue-400 p-2 rounded transition-colors"
+            >
+              <FontAwesomeIcon icon={faCoins} className="h-6 w-6" />
+            </button>
+            <Modal
               show={isUpgradePlanModalOpen}
               onClose={toggleUpgradePlanModal}
               title="Upgrade Plan Modal"
             >
               <UpgradePlan />
             </Modal>
-        </li>
+          </li>
         )}
       </ul>
-      <Tooltip id="sidebar-tip" />
+      {/* <Tooltip id="sidebar-tip" /> */}
     </nav>
   );
 };
