@@ -65,7 +65,7 @@ const ViewProperty = () => {
           // console.error('Fetch error:', error); 
         });
     }
-  }, [loggedIn, role, email]);
+  }, [loggedIn, role, email,filteredProperties]);
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const loc = e.target.value;
