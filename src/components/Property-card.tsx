@@ -7,7 +7,7 @@ const PropertyCard = ({ propertyData, className }: { propertyData: any, classNam
   
 
   return (
-    <Link to={`http://localhost:3000/view-property/${propertyData.pId}`} >
+    <Link to={`https://lively-meadow-0370e731e.5.azurestaticapps.net/view-property/${propertyData.pId}`} >
     <div className={cn('w-64 max-w-sm shadow-xl h-84 rounded-xl m-2 p-4 flex flex-col bg-white', className)}>
       <div className='w-full h-48 overflow-hidden rounded-t-lg'>
       {propertyData?.media?.map((mediaItem: any, index: number) => (

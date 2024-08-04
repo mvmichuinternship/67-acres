@@ -45,8 +45,8 @@ function App() {
                   element={<SingleProperty />}
                 />
                 <Route path="/edit-property/:pid" element={<EditProperty />} />
-                <Route path="/upgrade" element={<UpgradePlan />} />
-                <Route path="/switch-roles" element={<SwitchRole />} />
+                {/* <Route path="/upgrade" element={<UpgradePlan />} /> */}
+                {/* <Route path="/switch-roles" element={<SwitchRole />} /> */}
                 <Route path="*" element={<NoPage />} />
               </Routes>
             </Container>
