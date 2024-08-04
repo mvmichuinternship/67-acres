@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PropertyCard from "../components/Property-card.tsx";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button.tsx";
 import { toast } from "react-toastify";
+import Button from "../components/Button.tsx";
 
 const UpgradePlan = () => {
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ const UpgradePlan = () => {
     }
     if (loginData) {
       const parsedData = JSON.parse(loginData);
-      const token = parsedData?.token;
       const userEmail = parsedData?.email;
       const userRole = parsedData?.role;
 

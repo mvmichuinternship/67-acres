@@ -9,8 +9,6 @@ const ViewProperty = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [houseType, setHouseType] = useState("residential");
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -49,7 +47,7 @@ const ViewProperty = () => {
 
   useEffect(() => {
     if (loggedIn && email) {
-      fetch('http://localhost:5189/api/Property/GetProperties', {
+      fetch('https://67acres-webapp.azurewebsites.net/Property/GetProperties', {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JSON.parse(localStorage.getItem("loginData") || '{}')?.token}`,

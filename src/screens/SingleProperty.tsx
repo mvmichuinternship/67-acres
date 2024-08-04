@@ -18,7 +18,6 @@ const SingleProperty = () => {
   const [role, setRole] = useState<any>("");
   const [plan, setPlan] = useState<any>("");
   const [email1, setEmail] = useState("");
-  const [phone, setPhone] = useState<any>("");
   const [showContact, setShowContact] = useState(false);
   const [deleteProperty, setDeleteProperty] = useState(false);
   const [isUpgradePlanModalOpen, setIsUpgradePlanModalOpen] = useState(false);
@@ -78,11 +77,9 @@ const SingleProperty = () => {
     var res = localStorage.getItem("loginData");
     if(res)
     var parsedData = JSON.parse(res);
-  const {email, phone} = parsedData
+  const {email} = parsedData
     setEmail(email);
-      setPhone(phone);
-      var subject = "Contacting via 67acres"
-      var htmlcontent=`<h1>Inquiry about property ${property?.name}</h1>`
+     
     if (res) var token = JSON.parse(res)?.token;
     fetch(`http://localhost:5189/api/Property/DeleteProperty?postPropertyDTO=${pid}`, {
       method: "DELETE",
@@ -111,9 +108,8 @@ const SingleProperty = () => {
     if(res){
 
       var parsedData = JSON.parse(res);
-    const {email, phone} = parsedData
+    const {email} = parsedData
       email2=email
-        setPhone(phone);
     }
     console.log(email2)
       var subject = "Contacting via 67acres"
