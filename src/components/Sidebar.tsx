@@ -13,7 +13,7 @@ import {
   faCoins
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import Tooltip from "react-tooltip";
+import {Tooltip} from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { toast } from "react-toastify";
 import SwitchRole from "../screens/SwitchRoles.tsx";
