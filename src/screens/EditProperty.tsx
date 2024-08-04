@@ -647,7 +647,7 @@ const EditProperty = () => {
                   userData.media.map((file, index) => (
                     <div key={index} className="mb-2">
                       <img
-                        src={URL.createObjectURL(file.filedata)}
+                        src={file.url}
                         alt={`New Media ${index}`}
                         style={{ maxWidth: "200px", maxHeight: "200px" }}
                       />
