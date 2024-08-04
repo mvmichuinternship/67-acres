@@ -109,7 +109,7 @@ const ViewProperty = () => {
   
     if (selectedTypes.length > 0) {
       if (houseType === "all") {
-        filtered = filtered
+        filtered = properties
       }
       if (houseType === "residential") {
         filtered = filtered.filter((property: any) => selectedTypes.includes(property.residentialSubtype));
