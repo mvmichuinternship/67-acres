@@ -33,7 +33,7 @@ const MyProperties = () => {
 
   useEffect(() => {
     if (loggedIn && role === "seller" && email) {
-      fetch('http://localhost:5189/api/Property/GetProperties', {
+      fetch('https://67acres-webapp.azurewebsites.net/api/Property/GetProperties', {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JSON.parse(localStorage.getItem("loginData") || '{}')?.token}`,

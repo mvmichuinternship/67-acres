@@ -41,7 +41,7 @@ const SwitchRole = () => {
     formData.append("plan", plan);
 
     if (loggedIn && email) {
-      fetch(`http://localhost:5189/api/Login/SwitchRoles`, {
+      fetch(`https://67acres-webapp.azurewebsites.net/api/Login/SwitchRoles`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ` + token,

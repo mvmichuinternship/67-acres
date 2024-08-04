@@ -78,7 +78,7 @@ const Login = () => {
     validatePhone(userData.PhoneNumber);
     if (phoneError === "") {
       await fetch(
-        `http://localhost:5189/api/Login/GenerateSms?phone=${userData.PhoneNumber}`,
+        `https://67acres-webapp.azurewebsites.net/api/Login/GenerateSms?phone=${userData.PhoneNumber}`,
         {
           method: "POST",
           headers: {

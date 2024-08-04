@@ -188,7 +188,7 @@ const navigate = useNavigate();
     if(res)
       var token = JSON.parse(res)?.token
     try {
-      const response = await fetch("http://localhost:5189/api/Property/PostProperty", {
+      const response = await fetch("https://67acres-webapp.azurewebsites.net/api/Property/PostProperty", {
         method: "POST",
         headers: {
           "Authorization": "Bearer "+token,

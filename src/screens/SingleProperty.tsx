@@ -56,7 +56,7 @@ const SingleProperty = () => {
   useEffect(() => {
     var res = localStorage.getItem("loginData");
     if (res) var token = JSON.parse(res)?.token;
-    fetch(`http://localhost:5189/api/Property/GetProperty?property=${pid}`, {
+    fetch(`https://67acres-webapp.azurewebsites.net/api/Property/GetProperty?property=${pid}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
@@ -81,7 +81,7 @@ const SingleProperty = () => {
     setEmail(email);
      
     if (res) var token = JSON.parse(res)?.token;
-    fetch(`http://localhost:5189/api/Property/DeleteProperty?postPropertyDTO=${pid}`, {
+    fetch(`https://67acres-webapp.azurewebsites.net/api/Property/DeleteProperty?postPropertyDTO=${pid}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + token,
@@ -120,7 +120,7 @@ const SingleProperty = () => {
         htmlContent: htmlcontent
       }
     if (res) var token = JSON.parse(res)?.token;
-    fetch(`http://localhost:5189/api/Email/send`, {
+    fetch(`https://67acres-webapp.azurewebsites.net/api/Email/send`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,

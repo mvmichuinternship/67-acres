@@ -69,8 +69,8 @@ const Register = () => {
   };
   const validatePhone = (email) => {
     if (
-      String(email).toLowerCase().length >= 1 &&
-      String(email).toLowerCase().length <= 10
+      String(email).length >= 1 &&
+      String(email).length <= 10
     ) {
       setPhoneError("");
     } else {
@@ -106,7 +106,7 @@ const Register = () => {
     formData.append("Password", userData.Password);
 
     try {
-      const response = await fetch("http://localhost:5189/api/Login/Register", {
+      const response = await fetch("https://67acres-webapp.azurewebsites.net/api/Login/Register", {
         method: "POST",
         body: formData,
       });

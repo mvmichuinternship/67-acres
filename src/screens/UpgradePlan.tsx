@@ -53,7 +53,7 @@ const UpgradePlan = () => {
         
         if (loggedIn && email) {
             console.log(setPlan)
-          fetch(`http://localhost:5189/api/Login/UpgradePlan?upgradeplan=${setPlan}`, {
+          fetch(`https://67acres-webapp.azurewebsites.net/api/Login/UpgradePlan?upgradeplan=${setPlan}`, {
             method: "PUT",
             headers: {
               "Authorization": `Bearer ${JSON.parse(localStorage.getItem("loginData") || '{}')?.token}`,

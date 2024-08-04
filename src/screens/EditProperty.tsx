@@ -150,7 +150,7 @@ const EditProperty = () => {
   useEffect(() => {
     var res = localStorage.getItem("loginData");
     if (res) var token = JSON.parse(res)?.token;
-    fetch(`http://localhost:5189/api/Property/GetProperty?property=${pid}`, {
+    fetch(`https://67acres-webapp.azurewebsites.net/api/Property/GetProperty?property=${pid}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
@@ -227,7 +227,7 @@ const EditProperty = () => {
     if (res) var token = JSON.parse(res)?.token;
     try {
       const response = await fetch(
-        "http://localhost:5189/api/Property/UpdateProperty",
+        "https://67acres-webapp.azurewebsites.net/api/Property/UpdateProperty",
         {
           method: "PUT",
           headers: {
