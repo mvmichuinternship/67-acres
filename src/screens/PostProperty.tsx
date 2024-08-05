@@ -45,7 +45,7 @@ const navigate = useNavigate();
   const [nameError, setNameError] = useState("");
   const [priceError, setPriceError] = useState("");
   const [locationError, setLocationError] = useState("");
-  const [roleError, setRoleError] = useState("");
+  // const [roleError, setRoleError] = useState("");
 
 
   const handleInputChange = (e) => {
@@ -144,6 +144,17 @@ const navigate = useNavigate();
             else{
               navigate('/login')
             }
+
+            const handleRoleChange = (event) => {
+              setRole(event.detail);
+            };
+        
+            window.addEventListener('roleChanged', handleRoleChange);
+        
+            return () => {
+              window.removeEventListener('roleChanged', handleRoleChange);
+            };
+
           }, [loggedIn, role, navigate]);
   
 
@@ -163,21 +174,19 @@ const navigate = useNavigate();
     formData.append('phone', phone || userData.phone);
     formData.append('propertyType', userData.propertyType);
   
-    // Append property details
     for (const [key, value] of Object.entries(userData.propertyDetails)) {
-      formData.append(`propertyDetails.${key}`, value.toString()); // Convert numbers to string
+      formData.append(`propertyDetails.${key}`, value.toString()); 
     }
   
     formData.append('residentialSubtype', userData.residentialSubtype);
     formData.append('commercialSubtype', userData.commercialSubtype);
     formData.append('location', userData.location);
     // console.log(userData)
-    formData.append('price', userData.price.toString()); // Convert number to string
+    formData.append('price', userData.price.toString()); 
   
-    // Append media files
     userData.media.forEach((item, index) => {
       if (item.filedata instanceof File) {
-        formData.append(`media[${index}].file`, item.filedata); // Assuming `item.file` is a File object
+        formData.append(`media[${index}].file`, item.filedata); 
       } else {
         // console.error("Invalid file type for media item:", item);
       }
@@ -208,6 +217,7 @@ const navigate = useNavigate();
         // console.error("Error details:", errorText);
       }
     } catch (error) {
+      toast.error("Failed to post property.")
       // console.error("An error occurred while posting the property:", error);
     }
   };

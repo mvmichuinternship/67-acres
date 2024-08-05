@@ -43,7 +43,18 @@ const ViewProperty = () => {
     } else {
       navigate('/login');
     }
-  }, [navigate]);
+
+    const handleRoleChange = (event) => {
+      setRole(event.detail);
+    };
+
+    window.addEventListener('roleChanged', handleRoleChange);
+
+    return () => {
+      window.removeEventListener('roleChanged', handleRoleChange);
+    };
+
+  }, [navigate, role]);
 
   useEffect(() => {
     if (loggedIn && email) {

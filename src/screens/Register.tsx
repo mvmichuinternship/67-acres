@@ -77,15 +77,15 @@ const Register = () => {
       setPhoneError("Enter valid Phone Number");
     }
   };
-  const validateRole = (email) => {
-    if (
-      String(email)==""
-    ) {
-      setRoleError("");
-    } else {
-      setRoleError("Please choose a role");
-    }
-  };
+  // const validateRole = (email) => {
+  //   if (
+  //     String(email)==""
+  //   ) {
+  //     setRoleError("");
+  //   } else {
+  //     setRoleError("Please choose a role");
+  //   }
+  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -116,11 +116,12 @@ const Register = () => {
         toast.success(`Successfully registered`)
         navigate('/login');
       } else {
-        console.log("Upload failed");
+        // console.log("Upload failed");
+        toast.error("Registration failed")
       }
     } catch (error) {
       toast.error(error)
-      console.error("Error uploading property:", error);
+      // console.error("Error uploading property:", error);
     }
     console.log(userData)
   };

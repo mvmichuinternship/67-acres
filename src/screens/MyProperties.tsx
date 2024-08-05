@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropertyCard from "../components/Property-card.tsx";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MyProperties = () => {
   const navigate = useNavigate();
@@ -29,7 +30,18 @@ const MyProperties = () => {
     } else {
       navigate('/login');
     }
-  }, [navigate]);
+
+    const handleRoleChange = (event) => {
+      setRole(event.detail);
+    };
+
+    window.addEventListener('roleChanged', handleRoleChange);
+
+    return () => {
+      window.removeEventListener('roleChanged', handleRoleChange);
+    };
+
+  }, [navigate, role]);
 
   useEffect(() => {
     if (loggedIn && role === "seller" && email) {
@@ -46,6 +58,7 @@ const MyProperties = () => {
           setProperties(filteredProperties);
         })
         .catch((error) => {
+          toast.error("Error loading results")
           // console.error('Fetch error:', error); // Handle any errors that occur during fetch
         });
     }

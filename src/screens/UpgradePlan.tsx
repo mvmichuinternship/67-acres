@@ -52,7 +52,7 @@ const UpgradePlan = () => {
         
         
         if (loggedIn && email) {
-            console.log(setPlan)
+            // console.log(setPlan)
           fetch(`https://67acres-webapp.azurewebsites.net/api/Login/UpgradePlan?upgradeplan=${setPlan}`, {
             method: "PUT",
             headers: {
@@ -62,14 +62,19 @@ const UpgradePlan = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log("data", data);
-              toast.success(`Plan switched to ${data?.plan}!`)
-              localStorage.setItem("loginData", JSON.stringify(data))
-              setcurrentPlan(data.plan);
+              // console.log("data", data);
+              if(data){
+                toast.success(`Plan switched to ${data?.plan}!`)
+                localStorage.setItem("loginData", JSON.stringify(data))
+                setcurrentPlan(data.plan);
+              }
+              else{
+                toast.error("Failed to switch plan")
+              }
             })
             .catch((error) => {
               toast.error(error)
-              console.error('Fetch error:', error); // Handle any errors that occur during fetch
+              // console.error('Fetch error:', error);
             });
         
     }

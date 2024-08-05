@@ -51,6 +51,17 @@ const SingleProperty = () => {
     } else {
       navigate("/login");
     }
+
+    const handleRoleChange = (event) => {
+      setRole(event.detail);
+    };
+
+    window.addEventListener('roleChanged', handleRoleChange);
+
+    return () => {
+      window.removeEventListener('roleChanged', handleRoleChange);
+    };
+
   }, [loggedIn, role, navigate,plan]);
 
   useEffect(() => {
@@ -64,8 +75,14 @@ const SingleProperty = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(email1);
-        setProperty(data);
+        // console.log(email1);
+        if(data){
+          setProperty(data);
+          // toast.success("Failed to load property")
+        }
+        else{
+          toast.error("Failed to load property")
+        }
       })
       .catch((error) => {
         // console.error("Fetch error:", error);
@@ -88,11 +105,12 @@ const SingleProperty = () => {
       },
       
     })
-      .then((res) => res.json())
-      .then((data) => {
+      // .then((res) => res.json())
+      .then(async(res) => {
         // console.log(data);
         toast.success(`Deleted successfully`)
         setDeleteProperty(false);
+        return await res.json();
       })
       .catch((error) => {
         toast.error(error)

@@ -19,6 +19,7 @@ const Login = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [roles, setRoles] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [otpError, setOtpError] = useState("");
@@ -98,7 +99,7 @@ const Login = () => {
     if (otpError === "") {
       try {
         const response = await fetch(
-          `http://localhost:5189/api/Login/LoginViaOtp?phone=${userData.PhoneNumber}&otp=${userData.OTP}`,
+          `https://67acres-webapp.azurewebsites.net/api/Login/LoginViaOtp?phone=${userData.PhoneNumber}&otp=${userData.OTP}`,
           {
             method: "POST",
             headers: {
@@ -126,15 +127,21 @@ const Login = () => {
               navigate('/login')
             }
           }
-          // Handle successful OTP verification (e.g., redirect to dashboard)
+          const handleRoleChange = (event) => {
+            setRoles(event.detail);
+          };
+      
+          window.addEventListener('roleChanged', handleRoleChange);
+      
+          return () => {
+            window.removeEventListener('roleChanged', handleRoleChange);
+          };
         } else {
           const errorData = await response.json();
           console.error("OTP verification failed", errorData);
-          // Handle OTP verification failure (e.g., show error message)
         }
       } catch (error) {
-        console.error("Error verifying OTP", error);
-        // Handle network or other errors (e.g., show error message)
+        // console.error("Error verifying OTP", error);
       }
     }
   };
@@ -149,7 +156,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5189/api/Login/LoginwithPassword",
+        "https://67acres-webapp.azurewebsites.net/api/Login/LoginwithPassword",
         {
           method: "POST",
           body: formData,
@@ -160,7 +167,8 @@ const Login = () => {
         const data = await response.json();
         toast.success(`Login successful`)
         // console.log("Login successful", response);
-        window.location.reload()
+        setTimeout(()=>{window.location.reload()},5000)
+        // window.location.reload()
         localStorage.setItem("loginData", JSON.stringify(data));
         var res = localStorage.getItem("loginData")
           if(res){
@@ -179,7 +187,7 @@ const Login = () => {
       }
     } catch (error) {
       toast.error(error)
-      console.error("Error logging in:", error);
+      // console.error("Error logging in:", error);
     }
     // console.log(userData);
   };

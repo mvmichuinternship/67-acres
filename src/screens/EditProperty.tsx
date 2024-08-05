@@ -11,7 +11,7 @@ interface MediaItem {
   type: string;
 }
 interface Media {
-  filedata: File;
+  filedata?: string;
   url: string;
   type: string;
 }
@@ -100,25 +100,11 @@ const EditProperty = () => {
     }
   };
 
-  //   const handleMediaChange = (e) => {
-  //     if (e.target.files) {
-  //       const filesArray = Array.from(e.target.files);
-  //       const newMediaItems = filesArray.map((file: any) => ({
-  //         filedata: file,
-  //         url:"",
-  //         type: file.type,
-  //       }));
-  //       setUserData((prevState) => ({
-  //         ...prevState,
-  //         media: [...prevState.media, ...newMediaItems],
-  //       }));
-  //     }
-  //   };
   const handleMediaChange = (e) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
       const newMediaItems = filesArray.map((file: any) => ({
-        filedata: file,
+        filedata: " ",
         url: "",
         type: file.type,
       }));
@@ -145,6 +131,17 @@ const EditProperty = () => {
     } else {
       navigate("/login");
     }
+
+    const handleRoleChange = (event) => {
+      setRole(event.detail);
+    };
+
+    window.addEventListener('roleChanged', handleRoleChange);
+
+    return () => {
+      window.removeEventListener('roleChanged', handleRoleChange);
+    };
+
   }, [loggedIn, role, navigate]);
 
   useEffect(() => {
@@ -158,13 +155,16 @@ const EditProperty = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setUserData(data);
       })
       .catch((error) => {
-        console.error("Fetch error:", error);
+        // console.error("Fetch error:", error);
         navigate("/view-properties");
       });
+
+      
+
   }, [pid, navigate]);
 
   const handleSubmit = async (e) => {
@@ -213,11 +213,12 @@ const EditProperty = () => {
 
     // Append new media files
     userData.media.forEach((item, index) => {
-      if (item.filedata instanceof File) {
+      if (item.filedata) {
         formData.append(`media[${index}].file`, item.filedata);
-      } else {
-        console.error("Invalid file type for media item:", item);
-      }
+      } 
+      // else {
+      //   console.error("Invalid file type for media item:", item);
+      // }
       formData.append(`media[${index}].url`, item.url);
       formData.append(`media[${index}].type`, item.type);
       console.log(userData);
@@ -238,16 +239,17 @@ const EditProperty = () => {
       );
 
       if (response.ok) {
-        console.log("Property posted successfully!");
+        // console.log("Property posted successfully!");
         toast.success("Property edited successfully!")
         navigate("/my-properties");
       } else {
-        console.error("Failed to post property.");
+        // console.error("Failed to post property.");
         const errorText = await response.text();
         toast.error("Failed to post property.")
         console.error("Error details:", errorText);
       }
     } catch (error) {
+      toast.error("Failed to post property.")
       console.error("An error occurred while posting the property:", error);
     }
   };
@@ -636,7 +638,7 @@ const EditProperty = () => {
               type="file"
               id="media"
               name="media"
-              accept="image/png, image/jpeg, video/mp4"
+              accept="image/png, image/jpeg, image/jpg, video/mp4"
               multiple
               onChange={handleMediaChange}
             />

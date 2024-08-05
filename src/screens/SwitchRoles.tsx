@@ -50,17 +50,22 @@ const SwitchRole = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("data", data);
-          toast.success(`Role switched to ${data?.role}!`);
-          localStorage.setItem("loginData", JSON.stringify(data));
-          setCurrentRole(data.role);
-          setRole(data.role === "seller" ? "buyer" : "seller");
-          const event = new CustomEvent('roleChanged', { detail: data.role });
-          window.dispatchEvent(event);
+          // console.log("data", data);
+          if(data){
+            toast.success(`Role switched to ${data?.role}!`);
+            localStorage.setItem("loginData", JSON.stringify(data));
+            setCurrentRole(data.role);
+            setRole(data.role === "seller" ? "buyer" : "seller");
+            const event = new CustomEvent('roleChanged', { detail: data.role });
+            window.dispatchEvent(event);
+          }
+          else{
+            toast.error("Failed to switch role")
+          }
         })
         .catch((error) => {
           toast.error(`Error switching roles`);
-          console.error("Fetch error:", error);
+          // console.error("Fetch error:", error);
         });
     }
   };
