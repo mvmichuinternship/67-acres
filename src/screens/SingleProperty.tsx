@@ -170,164 +170,326 @@ const SingleProperty = () => {
 
   return (
     loggedIn && (
-      (role==="seller"&& email1===property.userEmail)&&(
-      <div className="flex w-full justify-center items-center h-screen mt-16 p-4 md:mt-0 md:p-10  ">
-        <div className="w-full md:w-3/4 ">
-          <h1 className="text-2xl md:text-3xl font-bold mb-6">
-            Property Details
-          </h1>
-          <div className="flex flex-col md:flex-row mb-6 justify-between items-start space-y-10 md:space-y-0">
-            <div className=" w-full md:w-1/2 max-h-lg h-1/2 z-1">
-              <Slider {...sliderSettings} className="text-blue-400 relative z-1">
-                {property?.media?.map((mediaItem: any, index: number) => (
-                  <div key={index} className="">
-                    {mediaItem.type === "image/jpeg" || mediaItem.type ==="image/png" ? (
-                      <img
-                        src={mediaItem.url}
-                        alt={`media-${index}`}
-                        className="w-full h-56 object-fit rounded-lg"
-                      />
-                    ) : (
-                      <video
-                        src={mediaItem.url}
-                        controls
-                        className="w-full h-56 object-fill rounded-lg"
-                      />
-                    )}
-                  </div>
-                ))}
-              </Slider>
-            </div>
-            <div className="w-full md:pl-6 md:w-1/2 mt-6 md:mt-0 md:ml-6 flex flex-col justify-between md:items-start items-start">
-              <p className="mb-2 text-nowrap">
-                <strong>Location:</strong> {property.location}
-              </p>
-              <p className="mb-2 ">
-                <strong>Price:</strong> ${property.price}
-              </p>
-              {property.propertyType === "Residential" && (
-                <>
-                  <p className="mb-2 ">
-                    <strong>Type:</strong> {property.residentialSubtype}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Bedrooms:</strong>{" "}
-                    {property.propertyDetails.numberOfBedrooms}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Bathrooms:</strong>{" "}
-                    {property.propertyDetails.numberOfBathrooms}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Area (sq ft):</strong>{" "}
-                    {property.propertyDetails.areaInSqFt}
-                  </p>
-                </>
-              )}
-              {property.propertyType === "Commercial" && (
-                <>
-                  <p className="mb-2 ">
-                    <strong>Type:</strong> {property.commercialSubtype}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Width (ft):</strong>{" "}
-                    {property.propertyDetails.propertyDimensionsWidth}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Length (ft):</strong>{" "}
-                    {property.propertyDetails.propertyDimensionsLength}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Has Constructions:</strong>{" "}
-                    {property.propertyDetails.hasConstructions ? "Yes" : "No"}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Facing Road Width (ft):</strong>{" "}
-                    {property.propertyDetails.widthofFacingRoad}
-                  </p>
-                  <p className="mb-2 ">
-                    <strong>Commercial Area (sq ft):</strong>{" "}
-                    {property.propertyDetails.commercialAreaInSqFt}
-                  </p>
-                </>
-              )}
-              {role === "buyer" && (
-                <>
-                  <div className="flex mt-4 space-x-2">
-                    
-                    <button
-                      onClick={handleSendEmail}
-                      className="bg-blue-500 text-white py-2 px-4 rounded"
-                    >
-                      Send Email
-                    </button>
-                    {plan==="Premium" && !showContact&&(
-                    <button
-                      onClick={() => {setShowContact(true)}}
-                      className="bg-blue-500 text-white py-2 px-4 rounded"
-                    >
-                      View contact
-                    </button>)}
-                    {plan==="Basic" &&(
-                      <div>
-                    <button
-                      onClick={toggleUpgradePlanModal}
-                      className="bg-blue-500 text-white py-2 px-4 rounded z-50"
-                    >
-                      Upgrade to view contact
-                    </button>
-                    <Modal
-                    show={isUpgradePlanModalOpen}
-                    onClose={toggleUpgradePlanModal}
-                    title="Upgrade Plan"
-                  >
-                    <UpgradePlan />
-                  </Modal>
-                  </div>
-                  )}
-                  </div>
-                  {showContact && (
-                    <div className="mt-4">
-                      <p className="mb-2">
-                        <strong>Email:</strong> {property.userEmail}
-                      </p>
-                      <p className="mb-2">
-                        <strong>Phone:</strong> {property.phone}
-                      </p>
-                    </div>
-                  )}
-                </>
-              )}
-              {role === "seller" && (
-                <div className="flex mt-4">
-                  <button className="bg-blue-500 text-white py-2 px-4 rounded mr-2" onClick={()=>navigate(`/edit-property/${pid}`)}>
-                    Edit
-                  </button>
-                  {!deleteProperty&&(
-                  <button className="bg-blue-500 text-white py-2 px-4 rounded" onClick={()=>setDeleteProperty(true)}>
-                    Delete
-                  </button>)}
-                  </div>
-                  )}
-                  {deleteProperty &&(
-                    <div className="mt-4">
+      <div>
 
-                    <div className="text-nowrap text-sm mb-2">Are you sure you want to delete?</div>
-                    <div className="flex space-x-2 justify-center">
-                    <button className="bg-green-500 text-white py-1 px-4 rounded" onClick={handleDelete}>
-                    Yes
-                  </button>
-                    <button className="bg-red-500 text-white py-1 px-4 rounded" onClick={()=>{setDeleteProperty(!deleteProperty); navigate("/my-properties")}}>
-                    No
-                  </button>
-                  </div>
+        {(role==="seller"&& email1===property.userEmail)&&(
+        <div className="flex w-full justify-center items-center h-screen mt-16 p-4 md:mt-0 md:p-10  ">
+          <div className="w-full md:w-3/4 ">
+            <h1 className="text-2xl md:text-3xl font-bold mb-6">
+              Property Details
+            </h1>
+            <div className="flex flex-col md:flex-row mb-6 justify-between items-start space-y-10 md:space-y-0">
+              <div className=" w-full max-w-xl md:w-1/2 max-h-lg h-1/2 z-1">
+                <Slider {...sliderSettings} className="text-blue-400  z-1">
+                  {property?.media?.map((mediaItem: any, index: number) => (
+                    <div key={index} className="">
+                      {mediaItem.type === "image/jpeg" || mediaItem.type ==="image/png" ? (
+                        <img
+                          src={mediaItem.url}
+                          alt={`media-${index}`}
+                          className="w-full h-56 object-fit rounded-lg"
+                        />
+                      ) : (
+                        <video
+                          src={mediaItem.url}
+                          controls
+                          className="w-full h-56 object-fit rounded-lg"
+                        />
+                        // <></>
+                      )}
                     </div>
-                  )}
+                  ))}
+                </Slider>
+              </div>
+              <div className="w-full md:pl-6 md:w-1/2 mt-6 md:mt-0 md:ml-6 flex flex-col justify-between md:items-start items-start">
+                <p className="mb-2 text-nowrap">
+                  <strong>Location:</strong> {property.location}
+                </p>
+                <p className="mb-2 ">
+                  <strong>Price:</strong> ${property.price}
+                </p>
+                {property.propertyType === "Residential" && (
+                  <>
+                    <p className="mb-2 ">
+                      <strong>Type:</strong> {property.residentialSubtype}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Bedrooms:</strong>{" "}
+                      {property.propertyDetails.numberOfBedrooms}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Bathrooms:</strong>{" "}
+                      {property.propertyDetails.numberOfBathrooms}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Area (sq ft):</strong>{" "}
+                      {property.propertyDetails.areaInSqFt}
+                    </p>
+                  </>
+                )}
+                {property.propertyType === "Commercial" && (
+                  <>
+                    <p className="mb-2 ">
+                      <strong>Type:</strong> {property.commercialSubtype}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Width (ft):</strong>{" "}
+                      {property.propertyDetails.propertyDimensionsWidth}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Length (ft):</strong>{" "}
+                      {property.propertyDetails.propertyDimensionsLength}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Has Constructions:</strong>{" "}
+                      {property.propertyDetails.hasConstructions ? "Yes" : "No"}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Facing Road Width (ft):</strong>{" "}
+                      {property.propertyDetails.widthofFacingRoad}
+                    </p>
+                    <p className="mb-2 ">
+                      <strong>Commercial Area (sq ft):</strong>{" "}
+                      {property.propertyDetails.commercialAreaInSqFt}
+                    </p>
+                  </>
+                )}
+                {/* {role === "buyer" && (
+                  <>
+                    <div className="flex mt-4 space-x-2">
+                      
+                      <button
+                        onClick={handleSendEmail}
+                        className="bg-blue-500 text-white py-2 px-4 rounded"
+                      >
+                        Send Email
+                      </button>
+                      {plan==="Premium" && !showContact&&(
+                      <button
+                        onClick={() => {setShowContact(true)}}
+                        className="bg-blue-500 text-white py-2 px-4 rounded"
+                      >
+                        View contact
+                      </button>)}
+                      {plan==="Basic" &&(
+                        <div>
+                      <button
+                        onClick={toggleUpgradePlanModal}
+                        className="bg-blue-500 text-white py-2 px-4 rounded z-50"
+                      >
+                        Upgrade to view contact
+                      </button>
+                      <Modal
+                      show={isUpgradePlanModalOpen}
+                      onClose={toggleUpgradePlanModal}
+                      title="Upgrade Plan"
+                    >
+                      <UpgradePlan />
+                    </Modal>
+                    </div>
+                    )}
+                    </div>
+                    {showContact && (
+                      <div className="mt-4">
+                        <p className="mb-2">
+                          <strong>Email:</strong> {property.userEmail}
+                        </p>
+                        <p className="mb-2">
+                          <strong>Phone:</strong> {property.phone}
+                        </p>
+                      </div>
+                    )}
+                  </>
+                )} */}
+                {role === "seller" && (
+                  <div className="flex mt-4">
+                    <button className="bg-blue-500 text-white py-2 px-4 rounded mr-2" onClick={()=>navigate(`/edit-property/${pid}`)}>
+                      Edit
+                    </button>
+                    {!deleteProperty&&(
+                    <button className="bg-blue-500 text-white py-2 px-4 rounded" onClick={()=>setDeleteProperty(true)}>
+                      Delete
+                    </button>)}
+                    </div>
+                    )}
+                    {deleteProperty &&(
+                      <div className="mt-4">
+  
+                      <div className="text-nowrap text-sm mb-2">Are you sure you want to delete?</div>
+                      <div className="flex space-x-2 justify-center">
+                      <button className="bg-green-500 text-white py-1 px-4 rounded" onClick={handleDelete}>
+                      Yes
+                    </button>
+                      <button className="bg-red-500 text-white py-1 px-4 rounded" onClick={()=>{setDeleteProperty(!deleteProperty); navigate("/my-properties")}}>
+                      No
+                    </button>
+                    </div>
+                      </div>
+                    )}
+              </div>
             </div>
           </div>
         </div>
+        )}
+        {(role==="buyer"&& email1!==property.userEmail)&&(
+          <div className="flex w-full justify-center items-center h-screen mt-16 p-4 md:mt-0 md:p-10  ">
+            <div className="w-full md:w-3/4 ">
+              <h1 className="text-2xl md:text-3xl font-bold mb-6">
+                Property Details
+              </h1>
+              <div className="flex flex-col md:flex-row mb-6 justify-between items-start space-y-10 md:space-y-0">
+                <div className=" w-full md:w-1/2 max-h-lg h-1/2 z-1">
+                  <Slider {...sliderSettings} className="text-blue-400 relative z-1">
+                    {property?.media?.map((mediaItem: any, index: number) => (
+                      <div key={index} className="">
+                        {mediaItem.type === "image/jpeg" || mediaItem.type ==="image/png" ? (
+                          <img
+                            src={mediaItem.url}
+                            alt={`media-${index}`}
+                            className="w-full h-56 object-fit rounded-lg"
+                          />
+                        ) : (
+                          <video
+                            src={mediaItem.url}
+                            controls
+                            className="w-full h-56 object-fill rounded-lg"
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </Slider>
+                </div>
+                <div className="w-full md:pl-6 md:w-1/2 mt-6 md:mt-0 md:ml-6 flex flex-col justify-between md:items-start items-start">
+                  <p className="mb-2 text-nowrap">
+                    <strong>Location:</strong> {property.location}
+                  </p>
+                  <p className="mb-2 ">
+                    <strong>Price:</strong> ${property.price}
+                  </p>
+                  {property.propertyType === "Residential" && (
+                    <>
+                      <p className="mb-2 ">
+                        <strong>Type:</strong> {property.residentialSubtype}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Bedrooms:</strong>{" "}
+                        {property.propertyDetails.numberOfBedrooms}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Bathrooms:</strong>{" "}
+                        {property.propertyDetails.numberOfBathrooms}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Area (sq ft):</strong>{" "}
+                        {property.propertyDetails.areaInSqFt}
+                      </p>
+                    </>
+                  )}
+                  {property.propertyType === "Commercial" && (
+                    <>
+                      <p className="mb-2 ">
+                        <strong>Type:</strong> {property.commercialSubtype}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Width (ft):</strong>{" "}
+                        {property.propertyDetails.propertyDimensionsWidth}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Length (ft):</strong>{" "}
+                        {property.propertyDetails.propertyDimensionsLength}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Has Constructions:</strong>{" "}
+                        {property.propertyDetails.hasConstructions ? "Yes" : "No"}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Facing Road Width (ft):</strong>{" "}
+                        {property.propertyDetails.widthofFacingRoad}
+                      </p>
+                      <p className="mb-2 ">
+                        <strong>Commercial Area (sq ft):</strong>{" "}
+                        {property.propertyDetails.commercialAreaInSqFt}
+                      </p>
+                    </>
+                  )}
+                  {role === "buyer" && (
+                    <>
+                      <div className="flex mt-4 space-x-2">
+                        
+                        <button
+                          onClick={handleSendEmail}
+                          className="bg-blue-500 text-white py-2 px-4 rounded"
+                        >
+                          Send Email
+                        </button>
+                        {plan==="Premium" && !showContact&&(
+                        <button
+                          onClick={() => {setShowContact(true)}}
+                          className="bg-blue-500 text-white py-2 px-4 rounded"
+                        >
+                          View contact
+                        </button>)}
+                        {plan==="Basic" &&(
+                          <div>
+                        <button
+                          onClick={toggleUpgradePlanModal}
+                          className="bg-blue-500 text-white py-2 px-4 rounded z-50"
+                        >
+                          Upgrade to view contact
+                        </button>
+                        <Modal
+                        show={isUpgradePlanModalOpen}
+                        onClose={toggleUpgradePlanModal}
+                        title="Upgrade Plan"
+                      >
+                        <UpgradePlan />
+                      </Modal>
+                      </div>
+                      )}
+                      </div>
+                      {showContact && (
+                        <div className="mt-4">
+                          <p className="mb-2">
+                            <strong>Email:</strong> {property.userEmail}
+                          </p>
+                          <p className="mb-2">
+                            <strong>Phone:</strong> {property.phone}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                  {/* {role === "seller" && (
+                    <div className="flex mt-4">
+                      <button className="bg-blue-500 text-white py-2 px-4 rounded mr-2" onClick={()=>navigate(`/edit-property/${pid}`)}>
+                        Edit
+                      </button>
+                      {!deleteProperty&&(
+                      <button className="bg-blue-500 text-white py-2 px-4 rounded" onClick={()=>setDeleteProperty(true)}>
+                        Delete
+                      </button>)}
+                      </div>
+                      )}
+                      {deleteProperty &&(
+                        <div className="mt-4">
+    
+                        <div className="text-nowrap text-sm mb-2">Are you sure you want to delete?</div>
+                        <div className="flex space-x-2 justify-center">
+                        <button className="bg-green-500 text-white py-1 px-4 rounded" onClick={handleDelete}>
+                        Yes
+                      </button>
+                        <button className="bg-red-500 text-white py-1 px-4 rounded" onClick={()=>{setDeleteProperty(!deleteProperty); navigate("/my-properties")}}>
+                        No
+                      </button>
+                      </div>
+                        </div>
+                      )} */}
+                </div>
+              </div>
+            </div>
+          </div>
+          )}
       </div>
-      )
     )
   );
 };
