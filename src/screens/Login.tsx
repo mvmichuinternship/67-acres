@@ -77,19 +77,20 @@ const Login = () => {
 
   const handleSendOtp = async () => {
     validatePhone(userData.PhoneNumber);
+    console.log(userData.PhoneNumber)
     if (phoneError === "") {
       await fetch(
-        `https://67acres-webapp.azurewebsites.net/api/Login/GenerateSms?phone=${userData.PhoneNumber}`,
+        `https://67acres-webapp.azurewebsites.net/api/Login/GenerateSms?phone=${encodeURIComponent(userData.PhoneNumber.toString())}`,
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
           },
-          body: JSON.stringify({ phone: userData.PhoneNumber }),
+          // body: JSON.stringify({ phone: userData.PhoneNumber }),
         }
       )
-        .then((res) => res.json())
-        // .then((data) => console.log(data));
+        .then((res) => {res.json(); console.log(res)})
+        .then((data) => console.log(data));
       setOtpSent(true);
     }
   };
@@ -99,7 +100,7 @@ const Login = () => {
     if (otpError === "") {
       try {
         const response = await fetch(
-          `https://67acres-webapp.azurewebsites.net/api/Login/LoginViaOtp?phone=${userData.PhoneNumber}&otp=${userData.OTP}`,
+          `https://67acres-webapp.azurewebsites.net/api/Login/LoginViaOtp?phone=${userData.PhoneNumber.toString()}&otp=${userData.OTP}`,
           {
             method: "POST",
             headers: {
@@ -115,6 +116,7 @@ const Login = () => {
         if (response.ok) {
           const data = await response.json();
           // console.log("OTP verification successful", data);
+          toast.success(`Login successful`)
           localStorage.setItem("loginData", JSON.stringify(data));
           var res = localStorage.getItem("loginData")
           if(res){
@@ -127,6 +129,7 @@ const Login = () => {
               navigate('/login')
             }
           }
+          setTimeout(()=>{window.location.reload()},5000)
           const handleRoleChange = (event) => {
             setRoles(event.detail);
           };
@@ -271,7 +274,7 @@ const Login = () => {
               className="border border-neutral-300 rounded-md w-full px-4 py-1 focus:outline-blue-400"
               name="PhoneNumber"
               id="PhoneNumber"
-              type="text"
+              type="phone"
               placeholder="Enter Phone Number"
               onChange={(e) => {
                 validatePhone(e.target.value);

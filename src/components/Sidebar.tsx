@@ -7,9 +7,7 @@ import {
   faEye,
   faPlusCircle,
   faSignOutAlt,
-  faArrowUp,
   faRightLeft,
-  faSackDollar,
   faCoins
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -55,7 +53,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <nav className="bg-blue-500 sm:h-full h-auto sm:w-[7%] w-full p-4 fixed flex flex-row sm:flex-col justify-between items-center">
+    <nav className="bg-blue-500 z-50 sm:h-full h-auto sm:w-[7%] w-full p-4 fixed flex flex-row sm:flex-col justify-between items-center">
       <h1 className="text-white text-2xl font-bold sm:mb-6">67</h1>
       <ul className="sm:flex-1 flex flex-row  sm:flex-col sm:space-y-4">
         <li>

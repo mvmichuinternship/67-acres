@@ -5,11 +5,7 @@ import Button from "../components/Button.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-interface MediaItem {
-  id: number;
-  url: string;
-  type: string;
-}
+
 interface Media {
   filedata?: string;
   url: string;
@@ -104,13 +100,13 @@ const EditProperty = () => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
       const newMediaItems = filesArray.map((file: any) => ({
-        filedata: " ",
+        filedata: file.filedata,
         url: "",
         type: file.type,
       }));
       setUserData((prevState) => ({
         ...(prevState as any),
-        newMedia: [...(prevState.media || []), ...newMediaItems],
+        media: [...(prevState.media), ...newMediaItems],
       }));
     }
   };
@@ -186,13 +182,13 @@ const EditProperty = () => {
 
     // Append property details
     for (const [key, value] of Object.entries(userData.propertyDetails)) {
-      formData.append(`propertyDetails.${key}`, value.toString()); // Convert numbers to string
+      formData.append(`propertyDetails.${key}`, value.toString()); 
     }
 
     formData.append("residentialSubtype", userData.residentialSubtype);
     formData.append("commercialSubtype", userData.commercialSubtype);
     formData.append("location", userData.location);
-    formData.append("price", userData.price.toString()); // Convert number to string
+    formData.append("price", userData.price.toString()); 
 
     // userData.media.forEach((item, index) => {
     //   if (item.filedata instanceof File) {
@@ -211,7 +207,6 @@ const EditProperty = () => {
     //   formData.append(`media[${index}].type`, item.type);
     // });
 
-    // Append new media files
     userData.media.forEach((item, index) => {
       if (item.filedata) {
         formData.append(`media[${index}].file`, item.filedata);
@@ -239,18 +234,18 @@ const EditProperty = () => {
       );
 
       if (response.ok) {
-        // console.log("Property posted successfully!");
+        // console.log("Property edited successfully!");
         toast.success("Property edited successfully!")
         navigate("/my-properties");
       } else {
-        // console.error("Failed to post property.");
+        // console.error("Failed to edit property.");
         const errorText = await response.text();
-        toast.error("Failed to post property.")
+        toast.error("Failed to edit property.")
         console.error("Error details:", errorText);
       }
     } catch (error) {
-      toast.error("Failed to post property.")
-      console.error("An error occurred while posting the property:", error);
+      toast.error("Failed to edit property.")
+      console.error("An error occurred while editing the property:", error);
     }
   };
 
@@ -259,7 +254,7 @@ const EditProperty = () => {
     role === "seller" && (
       <Container className="sm:mt-20 pt-10 pb-10">
         <Card className="space-y-4  md:w-[65%] w-[80%]">
-        <span className="text-2xl">Post Property</span>
+        <span className="text-2xl">Edit Property</span>
         <div className="flex flex-wrap sm:flex-nowrap justify-center sm:justify-between w-full space-x-2 ">
           <div className=" flex flex-col justify-center items-start">
             <label htmlFor="name" className="text-xs">
@@ -628,7 +623,7 @@ const EditProperty = () => {
             </div>
           </>
         )}
-        <div className="flex justify-center w-full space-x-2">
+        {/* <div className="flex justify-center w-full space-x-2">
           <div className=" flex flex-col justify-center items-start">
             <label htmlFor="media" className="text-xs mb-1">
               Media(Images and Videos)
@@ -657,7 +652,7 @@ const EditProperty = () => {
                   ))}
               </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex justify-center sm:justify-start w-full space-x-2">
         <div className=" flex flex-col justify-center  items-start">
           <label htmlFor="price" className="text-xs">
@@ -677,7 +672,7 @@ const EditProperty = () => {
             </span>
             </div>
             </div>
-        <Button onClick={handleSubmit} title="Post Property" />
+        <Button onClick={handleSubmit} title="Edit Property" />
       </Card>
       </Container>
     )

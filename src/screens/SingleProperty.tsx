@@ -127,13 +127,13 @@ const SingleProperty = () => {
 
       var parsedData = JSON.parse(res);
     const {email} = parsedData
-      email2=email
+      email2=property?.userEmail
     }
-    console.log(email2)
+    // console.log(email2)
       var subject = "Contacting via 67acres"
       var htmlcontent=`<html><h1>Inquiry about property ${property?.name}</h1></html>`
       const send = {
-        toEmail:email2.toString(),
+        toEmail:property?.userEmail,
         subject: subject, 
         htmlContent: htmlcontent
       }
@@ -149,12 +149,18 @@ const SingleProperty = () => {
     })
       .then(async(resp) => {
         // console.log(resp)
-        toast.success(`Email sent successfully`)
-        return await resp.json();
+        if(resp){
+
+          toast.success(`Email sent successfully`)
+          
+          return await resp.json();
+        }
+        else{
+          toast.error("Cannot send email at the moment")
+        }
       })
       .catch((error) => {
         toast.error(error)
-        toast.error("Cannot send email at the moment")
         // console.error("Fetch error:", error);
         
       });

@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     // <div className="ml-[6%] min-h-screen w-full ">
     (!loggedIn &&(
-    <nav className="bg-gray-800 p-4 w-full">
+    <nav className="bg-gray-800 p-4 w-full z-50">
     <div className="  flex justify-between items-center">
       <Link to="/" className="text-white text-2xl font-bold">RealEstateApp</Link>
       <div>
