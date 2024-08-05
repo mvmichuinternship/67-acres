@@ -45,7 +45,7 @@ const EditProperty = () => {
   const [nameError, setNameError] = useState("");
   const [priceError, setPriceError] = useState("");
   const [locationError, setLocationError] = useState("");
-  const [roleError, setRoleError] = useState("");
+  // const [roleError, setRoleError] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -96,20 +96,20 @@ const EditProperty = () => {
     }
   };
 
-  const handleMediaChange = (e) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files);
-      const newMediaItems = filesArray.map((file: any) => ({
-        filedata: file.filedata,
-        url: "",
-        type: file.type,
-      }));
-      setUserData((prevState) => ({
-        ...(prevState as any),
-        media: [...(prevState.media), ...newMediaItems],
-      }));
-    }
-  };
+  // const handleMediaChange = (e) => {
+  //   if (e.target.files) {
+  //     const filesArray = Array.from(e.target.files);
+  //     const newMediaItems = filesArray.map((file: any) => ({
+  //       filedata: file.filedata,
+  //       url: "",
+  //       type: file.type,
+  //     }));
+  //     setUserData((prevState) => ({
+  //       ...(prevState as any),
+  //       media: [...(prevState.media), ...newMediaItems],
+  //     }));
+  //   }
+  // };
 
   useEffect(() => {
     var res = localStorage.getItem("loginData");
@@ -241,11 +241,11 @@ const EditProperty = () => {
         // console.error("Failed to edit property.");
         const errorText = await response.text();
         toast.error("Failed to edit property.")
-        console.error("Error details:", errorText);
+        // console.error("Error details:", errorText);
       }
     } catch (error) {
       toast.error("Failed to edit property.")
-      console.error("An error occurred while editing the property:", error);
+      // console.error("An error occurred while editing the property:", error);
     }
   };
 

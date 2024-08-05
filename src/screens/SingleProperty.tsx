@@ -270,7 +270,7 @@ const SingleProperty = () => {
                       <div>
                     <button
                       onClick={toggleUpgradePlanModal}
-                      className="bg-blue-500 text-white py-2 px-4 rounded"
+                      className="bg-blue-500 text-white py-2 px-4 rounded z-50"
                     >
                       Upgrade to view contact
                     </button>
