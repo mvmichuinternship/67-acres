@@ -56,6 +56,7 @@ const SwitchRole = () => {
             localStorage.setItem("loginData", JSON.stringify(data));
             setCurrentRole(data.role);
             setRole(data.role === "seller" ? "buyer" : "seller");
+            navigate('/my-properties')
             const event = new CustomEvent('roleChanged', { detail: data.role });
             window.dispatchEvent(event);
           }

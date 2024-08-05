@@ -113,7 +113,7 @@ const Sidebar = () => {
             <Modal
               show={isModalOpen}
               onClose={toggleModal}
-              title="Simple Modal"
+              title="Switch Role"
             >
               <SwitchRole />
             </Modal>
@@ -132,7 +132,7 @@ const Sidebar = () => {
             <Modal
               show={isModalOpen}
               onClose={toggleModal}
-              title="Simple Modal"
+              title="Switch Role"
             >
               <SwitchRole />
             </Modal>
@@ -168,7 +168,7 @@ const Sidebar = () => {
           <Modal
               show={isUpgradePlanModalOpen}
               onClose={toggleUpgradePlanModal}
-              title="Upgrade Plan Modal"
+              title="Upgrade Plan"
             >
               <UpgradePlan />
             </Modal>

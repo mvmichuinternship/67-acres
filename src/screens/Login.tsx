@@ -120,7 +120,7 @@ const Login = () => {
           localStorage.setItem("loginData", JSON.stringify(data));
           var res = localStorage.getItem("loginData")
           if(res){
-
+            
             if(JSON.parse(res)?.email && JSON.parse(res)?.role==="seller")
               navigate('/my-properties')
             else if(JSON.parse(res)?.email && JSON.parse(res)?.role==="buyer")
@@ -128,8 +128,8 @@ const Login = () => {
             else{
               navigate('/login')
             }
+            setTimeout(()=>{window.location.reload()},1000)
           }
-          setTimeout(()=>{window.location.reload()},5000)
           const handleRoleChange = (event) => {
             setRoles(event.detail);
           };

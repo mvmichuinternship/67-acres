@@ -9,12 +9,12 @@ const ViewProperty = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
-  const [houseType, setHouseType] = useState("residential");
+  const [houseType, setHouseType] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   
-  const allLocation = Array.from(new Set(properties.map((p) => p.location))) ;
+  const allLocation = Array.from(new Set(properties.map((p) => (p.location.trim())))) ;
   const allResidentialTypes :any = ["Apartment", "Villa", "Pg"]
   const allCommercialTypes:any = ["Plot", "Hospitality"];
 
@@ -214,7 +214,7 @@ const ViewProperty = () => {
             onChange={(e) => handleHouseTypeChange(e.target.value)}
             className="w-full p-2 border rounded"
           >
-            <option value="all">All</option>
+            <option value="all" >All</option>
             <option value="residential">Residential</option>
             <option value="commercial">Commercial</option>
           </select>

@@ -67,6 +67,7 @@ const UpgradePlan = () => {
                 toast.success(`Plan switched to ${data?.plan}!`)
                 localStorage.setItem("loginData", JSON.stringify(data))
                 setcurrentPlan(data.plan);
+                navigate('/view-properties')
               }
               else{
                 toast.error("Failed to switch plan")

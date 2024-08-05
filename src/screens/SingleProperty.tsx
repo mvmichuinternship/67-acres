@@ -169,6 +169,7 @@ const SingleProperty = () => {
 
   return (
     loggedIn && (
+      (role==="seller"&& email1===property.userEmail)||(role==="buyer"&& email1!==property.userEmail)&&(
       <div className="flex w-full justify-center items-center h-screen mt-16 p-4 md:mt-0 md:p-10  ">
         <div className="w-full md:w-3/4 ">
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
@@ -277,7 +278,7 @@ const SingleProperty = () => {
                     <Modal
                     show={isUpgradePlanModalOpen}
                     onClose={toggleUpgradePlanModal}
-                    title="Upgrade Plan Modal"
+                    title="Upgrade Plan"
                   >
                     <UpgradePlan />
                   </Modal>
@@ -325,6 +326,7 @@ const SingleProperty = () => {
           </div>
         </div>
       </div>
+      )
     )
   );
 };
