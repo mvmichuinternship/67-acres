@@ -12,18 +12,18 @@ const getCityFromGeolocation = async (callback: (city: string) => void) => {
             // Extract the city name from the response
             const city = data.address?.city|| "City not found";
             callback(city);
-            console.log("City name:", city);
+            // console.log("City name:", city);
           } catch (error) {
-            console.error("Error fetching city name:", error);
+            // console.error("Error fetching city name:", error);
           }
         }, (error) => {
-          console.error("Geolocation error:", error.message);
+          // console.error("Geolocation error:", error.message);
         }, { timeout: 10000 });
       } else {
-        console.error("Geolocation is not supported by this browser.");
+        // console.error("Geolocation is not supported by this browser.");
       }
     } catch (error) {
-      console.error("Unexpected error:", error);
+      // console.error("Unexpected error:", error);
     }
   };
   

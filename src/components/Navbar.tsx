@@ -20,7 +20,7 @@ const Navbar = () => {
     }
   }, []);
   useEffect(() => {
-   console.log(role)
+  //  console.log(role)
   }, []);
 
   const handleLogout = () => {

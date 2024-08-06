@@ -130,15 +130,15 @@ const Login = () => {
             }
             setTimeout(()=>{window.location.reload()},1000)
           }
-          const handleRoleChange = (event) => {
-            setRoles(event.detail);
-          };
+          // const handleRoleChange = (event) => {
+          //   setRoles(event.detail);
+          // };
       
-          window.addEventListener('roleChanged', handleRoleChange);
+          // window.addEventListener('roleChanged', handleRoleChange);
       
-          return () => {
-            window.removeEventListener('roleChanged', handleRoleChange);
-          };
+          // return () => {
+          //   window.removeEventListener('roleChanged', handleRoleChange);
+          // };
         } else {
           const errorData = await response.json();
           console.error("OTP verification failed", errorData);
