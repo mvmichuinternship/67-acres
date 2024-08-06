@@ -179,7 +179,7 @@ const SingleProperty = () => {
               Property Details
             </h1>
             <div className="flex flex-col md:flex-row mb-6 justify-between items-start space-y-10 md:space-y-0">
-              <div className=" w-full sm:max-w-xl md:w-1/2 max-h-lg h-1/2 z-1">
+              <div className=" w-full sm:max-w-xl max-w-md md:w-1/2 max-h-lg h-1/2 z-1">
                 <Slider {...sliderSettings} className="text-blue-400  z-1">
                   {property?.media?.map((mediaItem: any, index: number) => (
                     <div key={index} className="">
@@ -338,7 +338,7 @@ const SingleProperty = () => {
                 Property Details
               </h1>
               <div className="flex flex-col md:flex-row mb-6 justify-between items-start space-y-10 md:space-y-0">
-                <div className=" w-full md:w-1/2 sm:max-w-xl max-h-lg h-1/2 z-1">
+                <div className=" w-full md:w-1/2 sm:max-w-xl max-w-md max-h-lg h-1/2 z-1">
                   <Slider {...sliderSettings} className="text-blue-400 relative z-1">
                     {property?.media?.map((mediaItem: any, index: number) => (
                       <div key={index} className="">
